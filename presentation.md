@@ -147,6 +147,10 @@ $$
 - Avoid overfit
 - Adapt
 
+## Simulation
+
+![](static/walkforward.svg)
+
 ## Returns
 
 ![](static/walkforward-returns.png)
