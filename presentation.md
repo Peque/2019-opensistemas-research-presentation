@@ -142,6 +142,59 @@ $$
 
 # Walk-forward simulation
 
+## Goals :dart:
+
+- Avoid overfit
+- Adapt
+
+## Returns
+
+![](static/walkforward-returns.png)
+
+Single strategy, couple of symbols, max. 30 strategies
+
+## Dynamics
+
+![](static/walkforward-returns-dynamics.png)
+
+## By symbol
+
+![](static/walkforward-returns-by-symbol.png)
+
+## Trades per symbol
+
+![](static/walkforward-trades-per-symbol.png)
+
+## Symbol distribution
+
+![](static/walkforward-symbols-distribution.png)
+
+## Adaptation
+
+![](static/walkforward-portfolio-size.png)
+
+## Hyperparameters
+
+- Window size
+- Step size
+- Portfolio size
+- Max. correlation
+- Daily activity
+- Ratio filter
+- ...
+
+## Filter
+
+![](static/hyperparameters-filter.png)
+
+## Activity
+
+![](static/hyperparameters-activity.png)
+
+## Not always...
+
+![](static/hyperparameters-nothing.png)
+
 
 # Deep learning
 
