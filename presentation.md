@@ -34,6 +34,20 @@
 - Noise
 
 
+# Data store
+
+## Hierarchical Data Format
+
+- HDF5
+- Per-source
+- Per-symbol
+- Per-period
+
+## In-memory data
+
+- Pandas
+
+
 # Portfolio optimization
 
 ## Why?
