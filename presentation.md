@@ -19,6 +19,113 @@
 - ...
 
 
+# Introduction
+
+## Market data
+
+## Candles
+
+## Trading
+
+## Beasts
+
+- Spreads
+- Dynamics
+- Noise
+
+
+# Portfolio optimization
+
+## Why?
+
+- Increase diversification
+- Reduce correlation
+
+## Architecture
+
+**Generator**
+: Generates random configurations in the parameters subspace
+
+**Backtester**
+: Simulates the configuration and filters
+
+**Portfolio**
+: Includes the configuration if the portfolio performance improves
+
+## Basic architecture
+
+![](static/simple-architecture.svg)
+
+## Flexible
+
+![](static/complex-architecture.svg)
+
+## Genetic algorithms
+
+- Explore further on good results
+- High correlation makes the environment rules change
+- More hyperparameters/complexity
+
+## Exploration
+
+![](static/backtest-exploration-subspace.png)
+
+*Note variables' importance!*
+
+## 9 grid
+
+![](static/backtest-exploration-grid.png)
+
+## 9 random
+
+![](static/backtest-exploration-random.png)
+
+## 6 random
+
+![](static/backtest-exploration-random-few.png)
+
+## 64 grid
+
+![](static/backtest-exploration-grid-many.png)
+
+## 32 random
+
+![](static/backtest-exploration-random-many.png)
+
+## Smoothing
+
+![](static/smoothing.png){width=60%}
+
+## Filtering
+
+- Daily activity
+- Sharpe
+- Sortino
+
+$$
+S_a = \frac{E[R_a - R_b]}{\sigma_a}
+$$
+
+## Evaluation (optimization)
+
+- Performance
+- Pearson correlation
+
+![](static/correlation-matrix.png)
+
+## Advantages
+
+- Faster convergence
+- Traceable overfit
+- Flexible ranges and depth
+
+
+# Walk-forward simulation
+
+
+# Deep learning
+
+
 # Motivation
 
 ## Search engine results
@@ -354,98 +461,6 @@ if __name__ == '__main__':
     system['example'].set_attr(DEBUG=True)
     system['example'].subscribe(('EUR_USD', 1, 'Minutes'), 100)
 ```
-
-
-# Portfolio optimization
-
-## Why?
-
-- Increase diversification
-- Reduce correlation
-
-## Architecture
-
-**Generator**
-: Generates random configurations in the parameters subspace
-
-**Backtester**
-: Simulates the configuration and filters
-
-**Portfolio**
-: Includes the configuration if the portfolio performance improves
-
-## Basic architecture
-
-![](static/simple-architecture.svg)
-
-## Flexible
-
-![](static/complex-architecture.svg)
-
-## Genetic algorithms
-
-- Explore further on good results
-- High correlation makes the environment rules change
-- More hyperparameters/complexity
-
-## Exploration
-
-![](static/backtest-exploration-subspace.png)
-
-*Note variables' importance!*
-
-## 9 grid
-
-![](static/backtest-exploration-grid.png)
-
-## 9 random
-
-![](static/backtest-exploration-random.png)
-
-## 6 random
-
-![](static/backtest-exploration-random-few.png)
-
-## 64 grid
-
-![](static/backtest-exploration-grid-many.png)
-
-## 32 random
-
-![](static/backtest-exploration-random-many.png)
-
-## Smoothing
-
-![](static/smoothing.png){width=60%}
-
-## Filtering
-
-- Daily activity
-- Sharpe
-- Sortino
-
-$$
-S_a = \frac{E[R_a - R_b]}{\sigma_a}
-$$
-
-## Evaluation (optimization)
-
-- Performance
-- Pearson correlation
-
-![](static/correlation-matrix.png)
-
-## Advantages
-
-- Faster convergence
-- Traceable overfit
-- Flexible ranges and depth
-
-
-# Walk-forward simulation
-
-
-# Deep learning
 
 
 # Development methodology
