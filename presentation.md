@@ -80,6 +80,12 @@
 - High correlation makes the environment rules change
 - More hyperparameters/complexity
 
+## Settings
+
+- Parameters
+- Symbol
+- Period (?)
+
 ## Exploration
 
 ![](static/backtest-exploration-subspace.png)
