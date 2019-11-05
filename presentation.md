@@ -154,7 +154,8 @@ $$
 
 - Faster convergence
 - Traceable overfit
-- Flexible ranges and depth
+- Flexible depth
+- Can be interrupted
 
 
 # Walk-forward simulation
