@@ -23,15 +23,32 @@
 
 ## Market data
 
+![](static/spread.png)
+
 ## Candles
 
+![](static/candlestick-types.svg)
+
+## Indicators
+
+![](static/indicators.png){width=80%}
+
 ## Trading
+
+![](static/trading.png)
 
 ## Beasts
 
 - Spreads
 - Dynamics
 - Noise
+
+## Hopes
+
+- Randomness
+- Inertia
+
+![](static/randomness.png)
 
 
 # Data store

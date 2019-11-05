@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="564.02441"
+   height="190.96034"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="candlestick-types-color.svg">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="187.11467"
+     inkscape:cy="82.489548"
+     inkscape:document-units="px"
+     inkscape:current-layer="g3810-2"
+     showgrid="false"
+     units="mm"
+     fit-margin-left="2"
+     fit-margin-top="2"
+     fit-margin-right="2"
+     fit-margin-bottom="2"
+     inkscape:window-width="1623"
+     inkscape:window-height="757"
+     inkscape:window-x="170"
+     inkscape:window-y="71"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-81.91814,-203.11624)">
+    <g
+       id="g3804"
+       transform="translate(0,-2.96551)">
+      <g
+         id="g3799">
+        <g
+           id="g3047">
+          <g
+             transform="translate(-18.182746,15.649772)"
+             id="g3810">
+            <path
+               style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+               d="m 257.94906,325.18493 0,47.21166 0,0"
+               id="path3755-6"
+               inkscape:connector-curvature="0" />
+            <path
+               style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+               d="m 257.94906,202.20646 0,47.21166 0,0"
+               id="path3755"
+               inkscape:connector-curvature="0" />
+            <rect
+               style="fill:#93f18d;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;fill-opacity:1"
+               id="rect2985"
+               width="18.921125"
+               height="78.910324"
+               x="248.48849"
+               y="247.84637" />
+          </g>
+          <flowRoot
+             transform="translate(-12.182746,19.030654)"
+             style="font-size:16px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
+             id="flowRoot3815"
+             xml:space="preserve"><flowRegion
+               id="flowRegion3817"><rect
+                 style="font-size:16px;font-weight:bold;-inkscape-font-specification:Sans Bold"
+                 y="263.93811"
+                 x="100.51018"
+                 height="70.710678"
+                 width="117.1777"
+                 id="rect3819" /></flowRegion><flowPara
+               id="flowPara3821">Bullish candlestick</flowPara></flowRoot>          <path
+             inkscape:connector-curvature="0"
+             id="path3823"
+             d="m 243.24582,386.47501 53.21429,0"
+             style="fill:#4d4d4d;stroke:#b4b4b4;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+          <path
+             inkscape:connector-curvature="0"
+             id="path3825"
+             d="m 253.60297,342.54644 42.85714,0"
+             style="fill:none;stroke:#b4b4b4;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+          <path
+             inkscape:connector-curvature="0"
+             id="path3825-1"
+             d="m 253.60297,263.61787 42.85714,0"
+             style="fill:none;stroke:#b4b4b4;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+          <path
+             inkscape:connector-curvature="0"
+             id="path3823-7"
+             d="m 243.24582,218.97501 53.21429,0"
+             style="fill:none;stroke:#b4b4b4;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+          <text
+             sodipodi:linespacing="125%"
+             id="text3863"
+             y="222.28555"
+             x="301.02545"
+             style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+             xml:space="preserve"><tspan
+               style="font-size:12px"
+               y="222.28555"
+               x="301.02545"
+               id="tspan3865"
+               sodipodi:role="line">High</tspan></text>
+          <text
+             sodipodi:linespacing="125%"
+             id="text3863-1"
+             y="266.92841"
+             x="301.02545"
+             style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+             xml:space="preserve"><tspan
+               style="font-size:12px"
+               y="266.92841"
+               x="301.02545"
+               id="tspan3865-3"
+               sodipodi:role="line">Close</tspan></text>
+          <text
+             sodipodi:linespacing="125%"
+             id="text3863-5"
+             y="345.85699"
+             x="301.02545"
+             style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+             xml:space="preserve"><tspan
+               style="font-size:12px"
+               y="345.85699"
+               x="301.02545"
+               id="tspan3865-39"
+               sodipodi:role="line">Open</tspan></text>
+          <text
+             sodipodi:linespacing="125%"
+             id="text3863-50"
+             y="389.78555"
+             x="301.02545"
+             style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+             xml:space="preserve"><tspan
+               style="font-size:12px"
+               y="389.78555"
+               x="301.02545"
+               id="tspan3865-7"
+               sodipodi:role="line">Low</tspan></text>
+        </g>
+        <g
+           transform="translate(287.59109,9.7187517)"
+           id="g3910-6">
+          <g
+             id="g4010">
+            <g
+               id="g3810-2"
+               transform="translate(0,5.93102)">
+              <path
+                 inkscape:connector-curvature="0"
+                 id="path3755-6-2"
+                 d="m 257.94906,325.18493 0,47.21166 0,0"
+                 style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+              <path
+                 inkscape:connector-curvature="0"
+                 id="path3755-5"
+                 d="m 257.94906,202.20646 0,47.21166 0,0"
+                 style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+              <rect
+                 y="247.84637"
+                 x="248.48849"
+                 height="78.910324"
+                 width="18.921125"
+                 id="rect2985-6"
+                 style="fill:#ff0000;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;fill-opacity:1" />
+            </g>
+            <flowRoot
+               xml:space="preserve"
+               id="flowRoot3815-0"
+               style="font-size:16px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
+               transform="translate(6,9.3119022)"><flowRegion
+                 id="flowRegion3817-7"><rect
+                   id="rect3819-1"
+                   width="117.1777"
+                   height="70.710678"
+                   x="100.51018"
+                   y="263.93811"
+                   style="font-size:16px;font-weight:bold;-inkscape-font-specification:Sans Bold" /></flowRegion><flowPara
+                 id="flowPara3821-1">Bearish candlestick</flowPara></flowRoot>            <path
+               style="fill:#4d4d4d;stroke:#b4b4b4;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+               d="m 261.42857,373.79075 53.21429,0"
+               id="path3823-79"
+               inkscape:connector-curvature="0"
+               transform="translate(0,2.96551)" />
+            <path
+               style="fill:none;stroke:#b4b4b4;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+               d="m 271.78572,332.82769 42.85714,0"
+               id="path3825-0"
+               inkscape:connector-curvature="0" />
+            <path
+               style="fill:none;stroke:#b4b4b4;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+               d="m 271.78572,253.89912 42.85714,0"
+               id="path3825-1-1"
+               inkscape:connector-curvature="0" />
+            <path
+               style="fill:none;stroke:#b4b4b4;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+               d="m 261.42857,209.25626 53.21429,0"
+               id="path3823-7-3"
+               inkscape:connector-curvature="0" />
+            <text
+               xml:space="preserve"
+               style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+               x="319.20819"
+               y="212.5668"
+               id="text3863-6"
+               sodipodi:linespacing="125%"><tspan
+                 sodipodi:role="line"
+                 id="tspan3865-1"
+                 x="319.20819"
+                 y="212.5668"
+                 style="font-size:12px">High</tspan></text>
+            <text
+               xml:space="preserve"
+               style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+               x="319.20819"
+               y="257.20966"
+               id="text3863-1-4"
+               sodipodi:linespacing="125%"><tspan
+                 sodipodi:role="line"
+                 id="tspan3865-3-5"
+                 x="319.20819"
+                 y="257.20966"
+                 style="font-size:12px">Open</tspan></text>
+            <text
+               xml:space="preserve"
+               style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+               x="319.20819"
+               y="336.13824"
+               id="text3863-5-8"
+               sodipodi:linespacing="125%"><tspan
+                 sodipodi:role="line"
+                 id="tspan3865-39-2"
+                 x="319.20819"
+                 y="336.13824"
+                 style="font-size:12px">Close</tspan></text>
+            <text
+               xml:space="preserve"
+               style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+               x="319.20819"
+               y="380.0668"
+               id="text3863-50-7"
+               sodipodi:linespacing="125%"><tspan
+                 sodipodi:role="line"
+                 id="tspan3865-7-1"
+                 x="319.20819"
+                 y="380.0668"
+                 style="font-size:12px">Low</tspan></text>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
