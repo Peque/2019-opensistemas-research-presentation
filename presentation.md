@@ -219,6 +219,42 @@ Single strategy, couple of symbols, max. 30 strategies
 
 # Deep learning
 
+## Machine learning
+
+![](static/machine_learning.png)
+
+## Tools
+
+![](static/tensorflow.png)
+
+## Snapshots :camera:
+
+![](static/convolution-depth.svg){width=100%}
+
+## DNN
+
+![](static/dnn.svg){width=60%}
+
+## Layers
+
+- Vary
+- Convolution
+- Maxpooling
+- LSTM
+- Dropout, regularization
+- Batch normalization
+
+## Time encoding
+
+![](static/time-encoding.svg)
+
+```python
+encoded_time = 2 * numpy.pi * hours / hours_in_day
+array([
+  sin(encoded_time),
+  cos(encoded_time),
+])
+```
 
 # Motivation
 
