@@ -257,6 +257,61 @@ array([
 ])
 ```
 
+## Training
+
+![](static/ml-training-3k8c.png){width=55%}
+
+## Overfit
+
+![](static/ml-training-4xy7.png){width=55%}
+
+## Noisy
+
+![](static/ml-training-ilsy.png){width=55%}
+
+## Good
+
+![](static/ml-training-lexp.png){width=55%}
+
+## Stable
+
+![](static/ml-training-ls7a.png){width=55%}
+
+## Lucky
+
+![](static/ml-training-po22.png){width=55%}
+
+## Very lucky
+
+![](static/ml-training-sh4k.png){width=55%}
+
+## Typical
+
+![](static/ml-training-xn1a.png){width=55%}
+
+## Important
+
+- Regularization/dropout
+- DNN size
+- Batch size
+
+## Results
+
+![](static/ml-results.png){width=35%}
+
+## More data - training
+
+![](static/ml-more-data-training.png){width=40%}
+
+## More data - results
+
+![](static/ml-more-data-results.svg)
+
+## More data - vs. sampled
+
+![](static/ml-more-data-vs-sampled.png)
+
+
 # Motivation
 
 ## Search engine results
