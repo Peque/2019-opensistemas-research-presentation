@@ -437,10 +437,6 @@ $$
 - Local views
 - Decentralization
 
-## Other use cases
-
-![](./static/portfolio_osbrain.svg){width=100%}
-
 ## Processes vs. threads
 
 Have you met GIL?
