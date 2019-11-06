@@ -1,4 +1,4 @@
-% R&D at Opensistemas
+% Portfolio optimization and automated trading with Python
 % Miguel Sánchez de León Peque
 % 2019-11-08
 
@@ -15,8 +15,12 @@
 
 ## Abstract
 
-- TODO
-- ...
+- Markets/trading
+- Data storing
+- Portfolio optimization
+- Walk-forward simulation
+- Deep learning
+- Real-time trading platform
 
 
 # Introduction
