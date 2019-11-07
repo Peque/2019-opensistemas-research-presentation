@@ -13,7 +13,7 @@
 - Programming, data, machine learning
 - Python :heart:
 
-## Abstract
+## Abstract :book:
 
 - Markets/trading
 - Data storing
@@ -23,31 +23,39 @@
 - Real-time trading platform
 
 
-# Introduction
+# Markets :bar_chart:
+
+## Types
+
+![](static/markets-daily-trading-volume.png)
 
 ## Market data
 
 ![](static/spread.png)
 
+## Trading :heart:
+
+![](static/trading.png)
+
 ## Candles
 
 ![](static/candlestick-types.svg)
 
-## Indicators
+- Volume
+- Bid vs. ask
+- Traded vs. non-traded
+
+## Indicators :eyes:
 
 ![](static/indicators.png){width=80%}
 
-## Trading
-
-![](static/trading.png)
-
-## Beasts
+## Beasts :dragon:
 
 - Spreads
 - Dynamics
 - Noise
 
-## Hopes
+## Hopes :pray:
 
 - Randomness
 - Inertia
@@ -55,7 +63,7 @@
 ![](static/randomness.png)
 
 
-# Data store
+# Data store :file_folder:
 
 ## Hierarchical Data Format
 
@@ -69,7 +77,7 @@
 - Pandas
 
 
-# Portfolio optimization
+# Portfolio optimization :chart_with_upwards_trend:
 
 ## Why?
 
@@ -133,7 +141,9 @@
 
 ![](static/backtest-exploration-random-many.png)
 
-## Smoothing
+## Monte Carlo :thumbsup:
+
+## Smoothing :thumbsdown:
 
 ![](static/smoothing.png){width=60%}
 
@@ -228,7 +238,7 @@ Single strategy, couple of symbols, max. 30 strategies
 
 ![](static/machine_learning.png)
 
-## Tools
+## Tools :wrench:
 
 ![](static/tensorflow.png)
 
@@ -249,7 +259,7 @@ Single strategy, couple of symbols, max. 30 strategies
 - Dropout, regularization
 - Batch normalization
 
-## Time encoding
+## Time encoding :clock3:
 
 ![](static/time-encoding.svg)
 
@@ -316,7 +326,7 @@ array([
 ![](static/ml-more-data-vs-sampled.png)
 
 
-# Motivation
+# Real-time
 
 ## Search engine results
 
@@ -343,11 +353,7 @@ array([
 - Multiplatform
 - Python
 
-----
-
-> Is this possible?
-
----
+## Is this possible?
 
 ![](./static/dramatic-pause.gif){width=80%}
 
@@ -589,7 +595,8 @@ def example_safe(self, x):
 
 ```python
 import time
-from osbrain import random_nameserver
+
+from osbrain import run_nameserver
 from osbrain import run_agent
 
 
@@ -600,9 +607,9 @@ def log_message(agent, message):
 if __name__ == '__main__':
 
     # System deployment
-    ns = random_nameserver()
-    sender = run_agent('Alice', ns)
-    receiver = run_agent('Bob', ns)
+    ns = run_nameserver()
+    sender = run_agent('Alice')
+    receiver = run_agent('Bob')
 
     # System configuration
     addr = sender.bind('PUSH', alias='main')
