@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Miguel Sánchez de León Peque">
+  <meta name="dcterms.date" content="2019-11-08">
+  <title>Portfolio optimization and automated trading with Python</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="revealjs/css/reset.css">
+  <link rel="stylesheet" href="revealjs/css/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="revealjs/css/theme/white.css" id="theme">
+<link rel="stylesheet" href="markdownrevealstyle/custom.css">
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'revealjs/css/print/pdf.css' : 'revealjs/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="revealjs/lib/js/html5shiv.js"></script>
+  <![endif]-->
+  <script src="katex/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet" href="katex/katex.min.css" />
+
+<script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js"
+  crossorigin="anonymous"></script>
+<script>
+  function addEvent(element, eventName, fn) {
+    if (element.addEventListener)
+      element.addEventListener(eventName, fn, false);
+    else if (element.attachEvent)
+      element.attachEvent('on' + eventName, fn);
+  }
+
+  addEvent(window, 'load', function() {
+    twemoji.parse(document.body, {'folder': 'svg', 'ext': '.svg'});
+  });
+</script>
+
+</head>
+<body>
+  <div class="reveal">
+<div class="logo"><img src="markdownrevealstyle/logo.svg" /></div>
+    <div class="slides">
+
+<section data-background="markdownrevealstyle/background.svg" id="title-slide">
+  <h1 class="title">Portfolio optimization and automated trading with Python</h1>
+  <p class="author">Miguel Sánchez de León Peque</p>
+  <p class="date">2019-11-08</p>
+</section>
+
+<section data-background="markdownrevealstyle/background.svg">
+<section data-background="markdownrevealstyle/background.svg" id="introduction" class="title-slide slide level1">
+<h1>Introduction</h1>
+
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="hi" class="slide level2">
+<h2>Hi! <span class="emoji" data-emoji="wave">👋</span></h2>
+<ul>
+<li><a href="https://www.linkedin.com/in/peque">Miguel Sánchez de León Peque</a></li>
+<li><a href="http://www.opensistemas.com">OpenSistemas</a></li>
+<li>Data scientist</li>
+<li>Programming, data, machine learning</li>
+<li>Python <span class="emoji" data-emoji="heart">❤️</span></li>
+</ul>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="abstract" class="slide level2">
+<h2>Abstract <span class="emoji" data-emoji="book">📖</span></h2>
+<ul>
+<li>Markets/trading</li>
+<li>Data storing</li>
+<li>Portfolio optimization</li>
+<li>Walk-forward simulation</li>
+<li>Deep learning</li>
+<li>Real-time trading platform</li>
+</ul>
+</section>
+</section>
+<section data-background="markdownrevealstyle/background.svg">
+<section data-background="markdownrevealstyle/background.svg" id="markets" class="title-slide slide level1">
+<h1>Markets <span class="emoji" data-emoji="bar_chart">📊</span></h1>
+
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="types" class="slide level2">
+<h2>Types</h2>
+<p><img data-src="static/markets-daily-trading-volume.png" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="market-data" class="slide level2">
+<h2>Market data</h2>
+<p><img data-src="static/spread.png" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="trading-️" class="slide level2">
+<h2>Trading <span class="emoji" data-emoji="heart">❤️</span></h2>
+<p><img data-src="static/trading.png" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="candles" class="slide level2">
+<h2>Candles</h2>
+<p><img data-src="static/candlestick-types.svg" /></p>
+<ul>
+<li>Volume</li>
+<li>Bid vs. ask</li>
+<li>Traded vs. non-traded</li>
+</ul>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="indicators" class="slide level2">
+<h2>Indicators <span class="emoji" data-emoji="eyes">👀</span></h2>
+<p><img data-src="static/indicators.png" style="width:80.0%" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="beasts" class="slide level2">
+<h2>Beasts <span class="emoji" data-emoji="dragon">🐉</span></h2>
+<ul>
+<li>Spreads</li>
+<li>Dynamics</li>
+<li>Noise</li>
+</ul>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="hopes" class="slide level2">
+<h2>Hopes <span class="emoji" data-emoji="pray">🙏</span></h2>
+<ul>
+<li>Randomness</li>
+<li>Inertia</li>
+</ul>
+<p><img data-src="static/randomness.png" /></p>
+</section>
+</section>
+<section data-background="markdownrevealstyle/background.svg">
+<section data-background="markdownrevealstyle/background.svg" id="data-store" class="title-slide slide level1">
+<h1>Data store <span class="emoji" data-emoji="file_folder">📁</span></h1>
+
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="hierarchical-data-format" class="slide level2">
+<h2>Hierarchical Data Format</h2>
+<ul>
+<li>HDF5</li>
+<li>Per-source</li>
+<li>Per-symbol</li>
+<li>Per-period</li>
+</ul>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="in-memory-data" class="slide level2">
+<h2>In-memory data</h2>
+<ul>
+<li>Pandas</li>
+</ul>
+</section>
+</section>
+<section data-background="markdownrevealstyle/background.svg">
+<section data-background="markdownrevealstyle/background.svg" id="portfolio-optimization" class="title-slide slide level1">
+<h1>Portfolio optimization <span class="emoji" data-emoji="chart_with_upwards_trend">📈</span></h1>
+
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="why" class="slide level2">
+<h2>Why?</h2>
+<ul>
+<li>Increase diversification</li>
+<li>Reduce correlation</li>
+</ul>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="architecture" class="slide level2">
+<h2>Architecture</h2>
+<dl>
+<dt><strong>Generator</strong></dt>
+<dd>Generates random configurations in the parameters subspace
+</dd>
+<dt><strong>Backtester</strong></dt>
+<dd>Simulates the configuration and filters
+</dd>
+<dt><strong>Portfolio</strong></dt>
+<dd>Includes the configuration if the portfolio performance improves
+</dd>
+</dl>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="basic-architecture" class="slide level2">
+<h2>Basic architecture</h2>
+<p><img data-src="static/simple-architecture.svg" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="flexible" class="slide level2">
+<h2>Flexible</h2>
+<p><img data-src="static/complex-architecture.svg" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="genetic-algorithms" class="slide level2">
+<h2>Genetic algorithms</h2>
+<ul>
+<li>Explore further on good results</li>
+<li>High correlation makes the environment rules change</li>
+<li>More hyperparameters/complexity</li>
+</ul>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="settings" class="slide level2">
+<h2>Settings</h2>
+<ul>
+<li>Parameters</li>
+<li>Symbol</li>
+<li>Period (?)</li>
+</ul>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="exploration" class="slide level2">
+<h2>Exploration</h2>
+<p><img data-src="static/backtest-exploration-subspace.png" /></p>
+<p><em>Note variables’ importance!</em></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="grid" class="slide level2">
+<h2>9 grid</h2>
+<p><img data-src="static/backtest-exploration-grid.png" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="random" class="slide level2">
+<h2>9 random</h2>
+<p><img data-src="static/backtest-exploration-random.png" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="random-1" class="slide level2">
+<h2>6 random</h2>
+<p><img data-src="static/backtest-exploration-random-few.png" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="grid-1" class="slide level2">
+<h2>64 grid</h2>
+<p><img data-src="static/backtest-exploration-grid-many.png" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="random-2" class="slide level2">
+<h2>32 random</h2>
+<p><img data-src="static/backtest-exploration-random-many.png" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="monte-carlo" class="slide level2">
+<h2>Monte Carlo <span class="emoji" data-emoji="thumbsup">👍</span></h2>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="smoothing" class="slide level2">
+<h2>Smoothing <span class="emoji" data-emoji="thumbsdown">👎</span></h2>
+<p><img data-src="static/smoothing.png" style="width:60.0%" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="filtering" class="slide level2">
+<h2>Filtering</h2>
+<ul>
+<li>Daily activity</li>
+<li>Sharpe</li>
+<li>Sortino</li>
+</ul>
+<p><span class="math display">
+S_a = \frac{E[R_a - R_b]}{\sigma_a}
+</span></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="evaluation-optimization" class="slide level2">
+<h2>Evaluation (optimization)</h2>
+<ul>
+<li>Performance</li>
+<li>Pearson correlation</li>
+</ul>
+<p><img data-src="static/correlation-matrix.png" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="advantages" class="slide level2">
+<h2>Advantages</h2>
+<ul>
+<li>Faster convergence</li>
+<li>Traceable overfit</li>
+<li>Flexible depth</li>
+<li>Can be interrupted</li>
+</ul>
+</section>
+</section>
+<section data-background="markdownrevealstyle/background.svg">
+<section data-background="markdownrevealstyle/background.svg" id="walk-forward-simulation" class="title-slide slide level1">
+<h1>Walk-forward simulation</h1>
+
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="goals" class="slide level2">
+<h2>Goals <span class="emoji" data-emoji="dart">🎯</span></h2>
+<ul>
+<li>Avoid overfit</li>
+<li>Adapt</li>
+</ul>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="simulation" class="slide level2">
+<h2>Simulation</h2>
+<p><img data-src="static/walkforward.svg" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="returns" class="slide level2">
+<h2>Returns</h2>
+<p><img data-src="static/walkforward-returns.png" /></p>
+<p>Single strategy, couple of symbols, max. 30 strategies</p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="dynamics" class="slide level2">
+<h2>Dynamics</h2>
+<p><img data-src="static/walkforward-returns-dynamics.png" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="by-symbol" class="slide level2">
+<h2>By symbol</h2>
+<p><img data-src="static/walkforward-returns-by-symbol.png" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="trades-per-symbol" class="slide level2">
+<h2>Trades per symbol</h2>
+<p><img data-src="static/walkforward-trades-per-symbol.png" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="symbol-distribution" class="slide level2">
+<h2>Symbol distribution</h2>
+<p><img data-src="static/walkforward-symbols-distribution.png" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="adaptation" class="slide level2">
+<h2>Adaptation</h2>
+<p><img data-src="static/walkforward-portfolio-size.png" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="hyperparameters" class="slide level2">
+<h2>Hyperparameters</h2>
+<ul>
+<li>Window size</li>
+<li>Step size</li>
+<li>Portfolio size</li>
+<li>Max. correlation</li>
+<li>Daily activity</li>
+<li>Ratio filter</li>
+<li>…</li>
+</ul>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="filter" class="slide level2">
+<h2>Filter</h2>
+<p><img data-src="static/hyperparameters-filter.png" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="activity" class="slide level2">
+<h2>Activity</h2>
+<p><img data-src="static/hyperparameters-activity.png" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="not-always" class="slide level2">
+<h2>Not always…</h2>
+<p><img data-src="static/hyperparameters-nothing.png" /></p>
+</section>
+</section>
+<section data-background="markdownrevealstyle/background.svg">
+<section data-background="markdownrevealstyle/background.svg" id="deep-learning" class="title-slide slide level1">
+<h1>Deep learning</h1>
+
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="machine-learning" class="slide level2">
+<h2>Machine learning</h2>
+<p><img data-src="static/machine_learning.png" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="tools" class="slide level2">
+<h2>Tools <span class="emoji" data-emoji="wrench">🔧</span></h2>
+<p><img data-src="static/tensorflow.png" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="snapshots" class="slide level2">
+<h2>Snapshots <span class="emoji" data-emoji="camera">📷</span></h2>
+<p><img data-src="static/convolution-depth.svg" style="width:100.0%" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="dnn" class="slide level2">
+<h2>DNN</h2>
+<p><img data-src="static/dnn.svg" style="width:60.0%" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="layers" class="slide level2">
+<h2>Layers</h2>
+<ul>
+<li>Vary</li>
+<li>Convolution</li>
+<li>Maxpooling</li>
+<li>LSTM</li>
+<li>Dropout, regularization</li>
+<li>Batch normalization</li>
+</ul>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="time-encoding" class="slide level2">
+<h2>Time encoding <span class="emoji" data-emoji="clock3">🕒</span></h2>
+<p><img data-src="static/time-encoding.svg" /></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>encoded_time <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> numpy.pi <span class="op">*</span> hours <span class="op">/</span> hours_in_day</span>
+<span id="cb1-2"><a href="#cb1-2"></a>array([</span>
+<span id="cb1-3"><a href="#cb1-3"></a>  sin(encoded_time),</span>
+<span id="cb1-4"><a href="#cb1-4"></a>  cos(encoded_time),</span>
+<span id="cb1-5"><a href="#cb1-5"></a>])</span></code></pre></div>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="training" class="slide level2">
+<h2>Training</h2>
+<p><img data-src="static/ml-training-3k8c.png" style="width:55.0%" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="overfit" class="slide level2">
+<h2>Overfit</h2>
+<p><img data-src="static/ml-training-4xy7.png" style="width:55.0%" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="noisy" class="slide level2">
+<h2>Noisy</h2>
+<p><img data-src="static/ml-training-ilsy.png" style="width:55.0%" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="good" class="slide level2">
+<h2>Good</h2>
+<p><img data-src="static/ml-training-lexp.png" style="width:55.0%" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="stable" class="slide level2">
+<h2>Stable</h2>
+<p><img data-src="static/ml-training-ls7a.png" style="width:55.0%" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="lucky" class="slide level2">
+<h2>Lucky</h2>
+<p><img data-src="static/ml-training-po22.png" style="width:55.0%" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="very-lucky" class="slide level2">
+<h2>Very lucky</h2>
+<p><img data-src="static/ml-training-sh4k.png" style="width:55.0%" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="typical" class="slide level2">
+<h2>Typical</h2>
+<p><img data-src="static/ml-training-xn1a.png" style="width:55.0%" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="important" class="slide level2">
+<h2>Important</h2>
+<ul>
+<li>Regularization/dropout</li>
+<li>DNN size</li>
+<li>Batch size</li>
+</ul>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="results" class="slide level2">
+<h2>Results</h2>
+<p><img data-src="static/ml-results.png" style="width:35.0%" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="more-data---training" class="slide level2">
+<h2>More data - training</h2>
+<p><img data-src="static/ml-more-data-training.png" style="width:40.0%" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="more-data---results" class="slide level2">
+<h2>More data - results</h2>
+<p><img data-src="static/ml-more-data-results.svg" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="more-data---vs.-sampled" class="slide level2">
+<h2>More data - vs. sampled</h2>
+<p><img data-src="static/ml-more-data-vs-sampled.png" /></p>
+</section>
+</section>
+<section data-background="markdownrevealstyle/background.svg">
+<section data-background="markdownrevealstyle/background.svg" id="real-time" class="title-slide slide level1">
+<h1>Real-time</h1>
+
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="search-engine-results" class="slide level2">
+<h2>Search engine results</h2>
+<ul>
+<li>TradeStation</li>
+<li>Metatrader</li>
+<li>NinjaTrader</li>
+<li>Many others…</li>
+</ul>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="cons" class="slide level2">
+<h2>Cons</h2>
+<ul>
+<li>Proprietary</li>
+<li>Heavily desktop oriented</li>
+<li>Linux support?</li>
+<li>Can I use Python to create my strategies?</li>
+</ul>
+</section>
+<section data-background="markdownrevealstyle/background.svg" class="slide level2">
+
+<p><img data-src="./static/cry.gif" style="width:60.0%" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="what-we-wanted" class="slide level2">
+<h2>What we wanted</h2>
+<ul>
+<li>Control</li>
+<li>Optional GUI</li>
+<li>Multiplatform</li>
+<li>Python</li>
+</ul>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="is-this-possible" class="slide level2">
+<h2>Is this possible?</h2>
+<p><img data-src="./static/dramatic-pause.gif" style="width:80.0%" /></p>
+</section>
+</section>
+<section data-background="markdownrevealstyle/background.svg">
+<section data-background="markdownrevealstyle/background.svg" id="osmarkets" class="title-slide slide level1">
+<h1>osMarkets</h1>
+
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="basics" class="slide level2">
+<h2>Basics</h2>
+<ul>
+<li><strong>Broker-independent</strong> platform</li>
+<li>Implemented <strong>over osBrain</strong></li>
+<li>Designed for <strong>real-time automated trading</strong></li>
+</ul>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="overview" class="slide level2">
+<h2>Overview</h2>
+<p><img data-src="./static/architecture.svg" style="width:100.0%" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="feeder" class="slide level2">
+<h2>Feeder</h2>
+<ul>
+<li>Get market data</li>
+<li>Multithread</li>
+</ul>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="overview-1" class="slide level2">
+<h2>Overview</h2>
+<p><img data-src="./static/architecture.svg" style="width:100.0%" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="router" class="slide level2">
+<h2>Router</h2>
+<ul>
+<li>Broker independent provider</li>
+<li>Stores/distributes</li>
+<li>Update/resample</li>
+</ul>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="market-data-1" class="slide level2">
+<h2>Market data</h2>
+<ul>
+<li>Tick</li>
+<li>Bar</li>
+<li>Bar Series</li>
+</ul>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="bar-series" class="slide level2">
+<h2>Bar series</h2>
+<p><img data-src="./static/barseries.svg" style="width:100.0%" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="overview-2" class="slide level2">
+<h2>Overview</h2>
+<p><img data-src="./static/architecture.svg" style="width:100.0%" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="brain" class="slide level2">
+<h2>Brain</h2>
+<ul>
+<li>Subscriptions</li>
+<li>Run algorithms</li>
+<li>Send orders</li>
+<li>Great ecosystem</li>
+<li>Can do anything</li>
+</ul>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="abstraction" class="slide level2">
+<h2>Abstraction</h2>
+<p><img data-src="./static/brain-hierarchy-grayscale.svg" style="width:60.0%" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="overview-3" class="slide level2">
+<h2>Overview</h2>
+<p><img data-src="./static/architecture.svg" style="width:100.0%" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="trader" class="slide level2">
+<h2>Trader</h2>
+<ul>
+<li>Handle orders</li>
+<li>Multithread</li>
+</ul>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="example" class="slide level2">
+<h2>Example</h2>
+<p><img data-src="./static/architecture_2.svg" style="width:100.0%" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="other-agents" class="slide level2">
+<h2>Other agents</h2>
+<ul>
+<li>Logger</li>
+<li>Informer</li>
+<li>Overmind</li>
+</ul>
+</section>
+</section>
+<section data-background="markdownrevealstyle/background.svg">
+<section data-background="markdownrevealstyle/background.svg" id="gui" class="title-slide slide level1">
+<h1>GUI</h1>
+
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="features" class="slide level2">
+<h2>Features</h2>
+<ul>
+<li>Real-time <strong>market data visualization</strong></li>
+<li>Real-time <strong>indicators visualization</strong></li>
+<li><strong>Integration</strong> with osMarkets</li>
+</ul>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="qt" class="slide level2">
+<h2>Qt</h2>
+<ul>
+<li>Great <strong>portability</strong></li>
+<li>Probably the <strong>most widely used</strong></li>
+<li>LGPL</li>
+</ul>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="pyqtgraph" class="slide level2">
+<h2>PyQtGraph</h2>
+<ul>
+<li><strong>Pure Python</strong> graphics library</li>
+<li><strong>Fast</strong> real-time display</li>
+<li>User <strong>interaction</strong></li>
+<li>MIT</li>
+</ul>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="overview-4" class="slide level2">
+<h2>Overview</h2>
+<ul>
+<li><a href="./video/gui_main_window.webm">Main Window</a></li>
+<li><a href="./video/gui_chart.webm">Chart</a></li>
+<li><a href="./video/gui_indicators.webm">Indicators</a></li>
+</ul>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="note" class="slide level2">
+<h2>Note</h2>
+<p><img data-src="./static/architecture_gui.svg" style="width:80.0%" /></p>
+</section>
+</section>
+<section data-background="markdownrevealstyle/background.svg">
+<section data-background="markdownrevealstyle/background.svg" id="osbrain" class="title-slide slide level1">
+<h1>osBrain</h1>
+
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="basics-1" class="slide level2">
+<h2>Basics</h2>
+<blockquote>
+<p>A <strong>general purpose</strong> multi-agent system</p>
+</blockquote>
+<ul>
+<li>Independent agents</li>
+<li>Message passing</li>
+<li>Easy configuration and deployment</li>
+</ul>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="concurrency" class="slide level2">
+<h2>Concurrency</h2>
+<ul>
+<li>Locks</li>
+<li>Semaphores</li>
+<li>Critical sections</li>
+</ul>
+<p>Code <strong>fails</strong>. Misterious bugs…</p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" class="slide level2">
+
+<p>Irreversible disorders…</p>
+<p><img data-src="./static/developers.gif" style="width:70.0%" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="relativity" class="slide level2">
+<h2>Relativity</h2>
+<p><span class="math display">
+e = mc^2
+</span></p>
+<div class="fragment">
+<ul>
+<li><span class="math inline">e \equiv</span> energy (effort)</li>
+<li><span class="math inline">m \equiv</span> mass (lines of code)</li>
+<li><span class="math inline">c \equiv</span> <del>speed of light</del> concurrency</li>
+</ul>
+</div>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="multi-agent-systems" class="slide level2">
+<h2>Multi-agent systems</h2>
+<ul>
+<li>Autonomy of the agents</li>
+<li>Local views</li>
+<li>Decentralization</li>
+</ul>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="processes-vs.-threads" class="slide level2">
+<h2>Processes vs. threads</h2>
+<p>Have you met GIL?</p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="ømq" class="slide level2">
+<h2>ØMQ</h2>
+<blockquote>
+<p>ØMQ is very cool - If you don’t have a project that needs it… ¡create one!</p>
+</blockquote>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="why-1" class="slide level2">
+<h2>Why?</h2>
+<ul>
+<li>Higher level than raw sockets</li>
+<li>Asynchronous communication</li>
+<li>Multiconnetion (not necessarily one-to-one).</li>
+<li>Multipattern (REQ-REP, PUB-SUB…).</li>
+<li>Multitransport (inproc, ipc, tcp, pgm, epgm).</li>
+<li>Multilanguage (C, C++, Python, Scala, Haskell, Go…).</li>
+<li>Multiplatform.</li>
+<li>Scalable (threads, processes, machines)</li>
+<li>LGPL.</li>
+</ul>
+</section>
+<section data-background="markdownrevealstyle/background.svg" class="slide level2">
+
+<p><img data-src="./static/not_bad.jpg" /></p>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="a-basic-agent" class="slide level2">
+<h2>A basic agent</h2>
+<ul>
+<li>Is a system <strong>process</strong></li>
+<li>Implements methods for easy <strong>binding</strong> and <strong>connecting</strong> with different <strong>patterns</strong></li>
+<li>Activates on <strong>incoming message</strong></li>
+<li>Mulithreading may be used (<em>inproc</em> socket)</li>
+</ul>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="configuration" class="slide level2">
+<h2>Configuration</h2>
+<blockquote>
+<p>Agents are independent, but they must know the addresses of other agents</p>
+</blockquote>
+<ul>
+<li>There may be <strong>many sockets</strong>!</li>
+<li>For most agents, assigning a <strong>random address</strong> is simpler</li>
+</ul>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="if-only-we-could" class="slide level2">
+<h2>If only we could…</h2>
+<ul>
+<li>Have a <strong>name server</strong></li>
+<li>Have an <strong>Overmind</strong>…</li>
+</ul>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="pyro4" class="slide level2">
+<h2>Pyro4</h2>
+<ul>
+<li><strong>PY</strong>thon <strong>R</strong>emote <strong>O</strong>bjects</li>
+<li>Treat remote objects as local</li>
+<li>Already has a name server implementation</li>
+</ul>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="a-real-agent" class="slide level2">
+<h2>A real agent</h2>
+<ul>
+<li>Is a system <strong>process</strong></li>
+<li>This process runs a <strong>Pyro multiplexed server</strong></li>
+<li>The server serves an actual <strong>Agent object</strong></li>
+<li>Main thread runs the <strong>main loop</strong> (one-way) <!--
+- Other threads allow for **concurrent access for configuration** (*c = 2*)
+
+## Safe calls
+
+```python
+def example(self, x):
+    self.x = x
+
+def example_safe(self, x):
+    self.call_safe('example', x)
+```
+--></li>
+</ul>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="foss" class="slide level2">
+<h2>FOSS! <span class="emoji" data-emoji="tada">🎉</span></h2>
+<p><img data-src="./static/osbrain-logo-name.svg" style="width:15cm" /></p>
+<ul>
+<li><a href="https://pypi.python.org/pypi/osbrain">https://pypi.python.org/pypi/osbrain</a></li>
+<li><a href="https://github.com/opensistemas-hub/osbrain">https://github.com/opensistemas-hub/osbrain</a></li>
+<li><a href="https://osbrain.readthedocs.io/">https://osbrain.readthedocs.io/</a></li>
+</ul>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="conclusion" class="slide level2">
+<h2>Conclusion</h2>
+<ul>
+<li>General-purpose multi-agent system with Python</li>
+<li>Independent agents (processes)</li>
+<li>Message passing using ØMQ</li>
+<li>Easy deployment and remote configuration using Pyro4</li>
+</ul>
+</section>
+</section>
+<section data-background="markdownrevealstyle/background.svg">
+<section data-background="markdownrevealstyle/background.svg" id="code-examples" class="title-slide slide level1">
+<h1>Code examples</h1>
+
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="an-example-i" class="slide level2">
+<h2>An example (I)</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="im">import</span> time</span>
+<span id="cb2-2"><a href="#cb2-2"></a></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="im">from</span> osbrain <span class="im">import</span> run_nameserver</span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="im">from</span> osbrain <span class="im">import</span> run_agent</span>
+<span id="cb2-5"><a href="#cb2-5"></a></span>
+<span id="cb2-6"><a href="#cb2-6"></a></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="kw">def</span> log_message(agent, message):</span>
+<span id="cb2-8"><a href="#cb2-8"></a>    agent.log_info(<span class="st">&#39;received: </span><span class="sc">%s</span><span class="st">&#39;</span> <span class="op">%</span> message)</span>
+<span id="cb2-9"><a href="#cb2-9"></a></span>
+<span id="cb2-10"><a href="#cb2-10"></a></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">&#39;__main__&#39;</span>:</span>
+<span id="cb2-12"><a href="#cb2-12"></a></span>
+<span id="cb2-13"><a href="#cb2-13"></a>    <span class="co"># System deployment</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a>    ns <span class="op">=</span> run_nameserver()</span>
+<span id="cb2-15"><a href="#cb2-15"></a>    sender <span class="op">=</span> run_agent(<span class="st">&#39;Alice&#39;</span>)</span>
+<span id="cb2-16"><a href="#cb2-16"></a>    receiver <span class="op">=</span> run_agent(<span class="st">&#39;Bob&#39;</span>)</span>
+<span id="cb2-17"><a href="#cb2-17"></a></span>
+<span id="cb2-18"><a href="#cb2-18"></a>    <span class="co"># System configuration</span></span>
+<span id="cb2-19"><a href="#cb2-19"></a>    addr <span class="op">=</span> sender.bind(<span class="st">&#39;PUSH&#39;</span>, alias<span class="op">=</span><span class="st">&#39;main&#39;</span>)</span>
+<span id="cb2-20"><a href="#cb2-20"></a>    receiver.<span class="ex">connect</span>(addr, handler<span class="op">=</span>log_message)</span>
+<span id="cb2-21"><a href="#cb2-21"></a></span>
+<span id="cb2-22"><a href="#cb2-22"></a>    <span class="co"># Send messages</span></span>
+<span id="cb2-23"><a href="#cb2-23"></a>    <span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="cb2-24"><a href="#cb2-24"></a>        time.sleep(<span class="dv">1</span>)</span>
+<span id="cb2-25"><a href="#cb2-25"></a>        sender.send(<span class="st">&#39;main&#39;</span>, <span class="st">&#39;Hello, world!&#39;</span>)</span></code></pre></div>
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="an-example-ii" class="slide level2">
+<h2>An example (II)</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="im">from</span> osmarkets.brain <span class="im">import</span> Brain</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="im">from</span> osmarkets.architecture <span class="im">import</span> OandaArchitecture</span>
+<span id="cb3-3"><a href="#cb3-3"></a></span>
+<span id="cb3-4"><a href="#cb3-4"></a></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="kw">class</span> Example(Brain):</span>
+<span id="cb3-6"><a href="#cb3-6"></a>    <span class="kw">def</span> on_new_bar(<span class="va">self</span>, series):</span>
+<span id="cb3-7"><a href="#cb3-7"></a>        <span class="co"># Algorithm</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a>        <span class="cf">if</span> series[<span class="dv">0</span>].close <span class="op">&gt;</span> series[<span class="dv">1</span>].close:</span>
+<span id="cb3-9"><a href="#cb3-9"></a>            side <span class="op">=</span> <span class="st">&#39;buy&#39;</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a>        <span class="cf">else</span>:</span>
+<span id="cb3-11"><a href="#cb3-11"></a>            side <span class="op">=</span> <span class="st">&#39;sell&#39;</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a>        <span class="co"># Order</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a>        <span class="va">self</span>.send_order(side<span class="op">=</span>side,</span>
+<span id="cb3-14"><a href="#cb3-14"></a>                        size<span class="op">=</span><span class="dv">100</span>,</span>
+<span id="cb3-15"><a href="#cb3-15"></a>                        symbol<span class="op">=</span>series.bsid.symbol)</span>
+<span id="cb3-16"><a href="#cb3-16"></a></span>
+<span id="cb3-17"><a href="#cb3-17"></a></span>
+<span id="cb3-18"><a href="#cb3-18"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">&#39;__main__&#39;</span>:</span>
+<span id="cb3-19"><a href="#cb3-19"></a></span>
+<span id="cb3-20"><a href="#cb3-20"></a>    system <span class="op">=</span> OandaArchitecture(logging<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb3-21"><a href="#cb3-21"></a>                               account_id<span class="op">=</span><span class="dv">123456</span>,</span>
+<span id="cb3-22"><a href="#cb3-22"></a>                               access_token<span class="op">=</span><span class="st">&#39;123abc-345def&#39;</span>,</span>
+<span id="cb3-23"><a href="#cb3-23"></a>                               environment<span class="op">=</span><span class="st">&#39;live&#39;</span>)</span>
+<span id="cb3-24"><a href="#cb3-24"></a>    system.stream([<span class="st">&#39;EUR_USD&#39;</span>])</span>
+<span id="cb3-25"><a href="#cb3-25"></a></span>
+<span id="cb3-26"><a href="#cb3-26"></a>    system.add_brain(<span class="st">&#39;example&#39;</span>, base<span class="op">=</span>Example)</span>
+<span id="cb3-27"><a href="#cb3-27"></a>    system[<span class="st">&#39;example&#39;</span>].set_attr(DEBUG<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-28"><a href="#cb3-28"></a>    system[<span class="st">&#39;example&#39;</span>].subscribe((<span class="st">&#39;EUR_USD&#39;</span>, <span class="dv">1</span>, <span class="st">&#39;Minutes&#39;</span>), <span class="dv">100</span>)</span></code></pre></div>
+</section>
+</section>
+<section data-background="markdownrevealstyle/background.svg">
+<section data-background="markdownrevealstyle/background.svg" id="thats-all" class="title-slide slide level1">
+<h1>That’s all! <span class="emoji" data-emoji="tada">🎉</span> <span class="emoji" data-emoji="beers">🍻</span> <span class="emoji" data-emoji="smile">😄</span></h1>
+
+</section>
+<section data-background="markdownrevealstyle/background.svg" id="thanks-️" class="slide level2">
+<h2>Thanks! <span class="emoji" data-emoji="heart">❤️</span></h2>
+</section>
+</section>
+    </div>
+  </div>
+
+  <script src="revealjs/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+        // Display a presentation progress bar
+        progress: true,
+        // Display the page number of the current slide
+        slideNumber: false,
+        // Push each slide change to the browser history
+        history: true,
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+        // Enable the slide overview mode
+        overview: true,
+        // Vertical centering of slides
+        center: true,
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+        // Transition style
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+        // Transition speed
+        transitionSpeed: 'default', // default/fast/slow
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'revealjs/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'revealjs/plugin/zoom-js/zoom.js', async: true },
+          { src: 'revealjs/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>
